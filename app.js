@@ -135,7 +135,12 @@ function updateMediaSession() {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: `${track.number}. ${track.name} — ${track.arabic}`,
       artist: 'Quran Recitation',
-      album: 'Quran Reciter'
+      album: 'Quran Reciter',
+      artwork: [{
+        src: new URL('./quran-reciter-icon.png', document.baseURI).href,
+        sizes: '180x180',
+        type: 'image/png'
+      }]
     });
     navigator.mediaSession.playbackState = audio.paused ? 'paused' : 'playing';
   } catch (error) { console.debug('Media Session metadata unavailable:', error); }
