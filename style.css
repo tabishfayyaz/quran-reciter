@@ -7,6 +7,7 @@
 .surah-row:hover{background:#f6f9f6}
 .surah-row.active:hover{background:#edf5ed}
 .search-field input:focus-visible{outline:none;box-shadow:none}
+.seek-btn span{inset:0;width:14px;height:14px;margin:auto;display:grid;place-items:center;border-radius:50%;background:#0b302c;color:#fff;font-size:9px;line-height:1;z-index:1}
 .timeline input[type="range"]{appearance:none;-webkit-appearance:none;height:24px;background:transparent}
 .timeline input[type="range"]::-webkit-slider-runnable-track{height:4px;border-radius:99px;background:linear-gradient(to right,#d9e9c2 0 var(--progress,0%),#a6c5a8 var(--progress,0%) var(--buffered-progress,0%),#ffffff55 var(--buffered-progress,0%) 100%)}
 .timeline input[type="range"]::-moz-range-track{height:4px;border-radius:99px;background:linear-gradient(to right,#d9e9c2 0 var(--progress,0%),#a6c5a8 var(--progress,0%) var(--buffered-progress,0%),#ffffff55 var(--buffered-progress,0%) 100%)}
