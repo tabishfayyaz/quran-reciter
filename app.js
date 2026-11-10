@@ -6,6 +6,7 @@ const audio = document.querySelector('#audio');
 const el = (selector) => document.querySelector(selector);
 const list = el('#surah-list');
 const search = el('#search');
+const clearSearch = el('#clear-search');
 const seek = el('#seek');
 const playButton = el('#play');
 const shuffleButton = el('#shuffle');
@@ -76,6 +77,7 @@ function renderList() {
       const index = tracks.findIndex(track => track.number === Number(row.dataset.number));
       if (search.value) {
         search.value = '';
+        clearSearch.hidden = true;
         renderList();
       }
       if (index === currentIndex) {
@@ -233,7 +235,28 @@ function setupMediaControls() {
   }
 }
 
-search.addEventListener('input', renderList);
+search.addEventListener('input', () => {
+  renderList();
+  clearSearch.hidden = !search.value;
+});
+function keepSearchVisible() {
+  if (document.activeElement !== search) return;
+  const viewport = window.visualViewport;
+  const visibleBottom = viewport ? viewport.offsetTop + viewport.height : window.innerHeight;
+  const inputBottom = search.getBoundingClientRect().bottom;
+  const margin = 16;
+  if (inputBottom > visibleBottom - margin) {
+    window.scrollBy(0, inputBottom - visibleBottom + margin);
+  }
+}
+search.addEventListener('focus', () => requestAnimationFrame(keepSearchVisible));
+window.visualViewport?.addEventListener('resize', () => requestAnimationFrame(keepSearchVisible));
+clearSearch.addEventListener('click', () => {
+  search.value = '';
+  clearSearch.hidden = true;
+  renderList();
+  search.focus();
+});
 playButton.addEventListener('click', () => {
   if (audio.paused) {
     updatePlayButton(true);
