@@ -57,23 +57,19 @@ The site **streams the selected MP3**; it does not intentionally download all 11
 2. In GitHub, go to **Settings → Pages → Build and deployment**.
 3. Choose **Deploy from a branch**, select `main` and `/(root)`, and save.
 4. Open `https://YOUR_USERNAME.github.io/quran-reciter/` (replace username and repo name as appropriate).
-5. On iPhone in Safari, Share → **Add to Home Screen** to create a shortcut.
 
 All application asset URLs are relative to the repository path.
+
+## Add to iPhone Home Screen
+
+1. Open the deployed site in **Safari** on your iPhone.
+2. Tap the **Share** button.
+3. Scroll down and tap **Add to Home Screen**. If prompted, confirm the name and tap **Add**.
+4. Launch Quran Reciter from the new Home Screen icon. An internet connection is still required to stream recordings.
 
 ### Audio size guidance
 
 GitHub Pages has a published site limit of 1 GB, a recommended source repository limit of 1 GB, and a soft bandwidth limit of 100 GB/month. Standard GitHub uploads reject individual files above 100 MiB. A 600 MB collection may fit, but verify each large Surah MP3 and your final repository size. Avoid frequent replacement of large MP3s, because Git history retains older versions.
-
-## File overview
-
-- `index.html`: mobile-first single-page UI.
-- `style.css`: responsive appearance.
-- `app.js`: player, filtering, shuffle, repeat, seeking, lock-screen metadata.
-- `surahs.json`: 114 Surah names in Quran order.
-- `audio-files.json`: generated manifest of MP3 numbers present in `audio/`.
-- `scripts/update_audio_manifest.py`: dependency-free manifest generator.
-- `audio/`: your MP3 files (empty in the starter download).
 
 ## Limitations
 
