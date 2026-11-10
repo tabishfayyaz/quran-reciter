@@ -38,7 +38,7 @@ In iPhone Safari, open `http://YOUR_MAC_IP:8000` (for example, `http://192.168.1
 
 - Search the available recordings instantly by number (`114`) or name (`An-Nas`).
 - Tap the play button on any Surah row to play it. Tap it again to pause.
-- Main controls: play/pause, 10 seconds backward, 10 seconds forward, and progress seeking.
+- Main controls: play/pause, 5 seconds backward, 5 seconds forward, and progress seeking.
 - Default: play Surahs in numerical order and wrap around continuously.
 - **Repeat:** loop the current Surah indefinitely. Uses `audio.loop` to avoid swapping files between repeats.
 - **Shuffle:** immediately choose a random Surah, then choose another random Surah at the end of each track, excluding the current one when possible. Continues indefinitely.

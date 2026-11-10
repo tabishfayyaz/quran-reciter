@@ -223,8 +223,8 @@ function setupMediaControls() {
     pause: () => audio.pause(),
     nexttrack: nextTrack,
     previoustrack: previousTrack,
-    seekbackward: () => seekRelative(-10),
-    seekforward: () => seekRelative(10),
+    seekbackward: () => seekRelative(-5),
+    seekforward: () => seekRelative(5),
     seekto: details => { if (Number.isFinite(details.seekTime)) audio.currentTime = details.seekTime; }
   };
   for (const [action, handler] of Object.entries(handlers)) {
@@ -243,8 +243,8 @@ playButton.addEventListener('click', () => {
     updatePlayButton(false);
   }
 });
-el('#back').addEventListener('click', () => seekRelative(-10));
-el('#forward').addEventListener('click', () => seekRelative(10));
+el('#back').addEventListener('click', () => seekRelative(-5));
+el('#forward').addEventListener('click', () => seekRelative(5));
 shuffleButton.addEventListener('click', () => changeMode('shuffle'));
 repeatButton.addEventListener('click', () => changeMode('repeat'));
 seek.addEventListener('input', () => {
