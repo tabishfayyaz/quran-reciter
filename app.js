@@ -7,6 +7,7 @@ const el = (selector) => document.querySelector(selector);
 const list = el('#surah-list');
 const search = el('#search');
 const clearSearch = el('#clear-search');
+const searchScrollSpacer = el('#search-scroll-spacer');
 const seek = el('#seek');
 const playButton = el('#play');
 const shuffleButton = el('#shuffle');
@@ -17,6 +18,7 @@ let currentIndex = -1;
 let mode = 'repeat'; // 'sequential' | 'shuffle' | 'repeat'
 let playRequestId = 0;
 let seeking = false;
+let fullListHeight = 0;
 audio.loop = true;
 
 const escapeHtml = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -51,14 +53,27 @@ function updateSeekProgress() {
   seek.style.setProperty('--progress', `${played}%`);
   seek.style.setProperty('--buffered-progress', `${Math.min(100, buffered)}%`);
 }
+function preserveSearchScroll(query, previousScrollY) {
+  if (!query) {
+    searchScrollSpacer.style.height = '0px';
+    fullListHeight = list.offsetHeight;
+    return;
+  }
+  searchScrollSpacer.style.height = `${Math.max(0, fullListHeight - list.offsetHeight)}px`;
+  if (document.activeElement === search && window.scrollY < previousScrollY) {
+    window.scrollTo(0, previousScrollY);
+  }
+}
 
 function renderList() {
+  const previousScrollY = window.scrollY;
   const query = search.value.trim().toLowerCase();
   const filtered = tracks.filter(track =>
     String(track.number).includes(query) || track.name.toLowerCase().includes(query) || track.arabic.includes(query)
   );
   if (!filtered.length) {
     list.innerHTML = `<p class="empty">${tracks.length ? 'No Surahs match your search.' : 'No recordings found. Add MP3 files to audio/ and regenerate audio-files.json.'}</p>`;
+    preserveSearchScroll(query, previousScrollY);
     return;
   }
   list.innerHTML = filtered.map(track => {
@@ -85,6 +100,7 @@ function renderList() {
       } else chooseTrack(index);
     });
   });
+  preserveSearchScroll(query, previousScrollY);
 }
 
 function syncPlayer() {
